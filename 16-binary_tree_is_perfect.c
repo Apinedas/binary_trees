@@ -1,9 +1,9 @@
 #include "binary_trees.h"
 
 /**
- * aux_binary_tree_depth - measures the depth of a node in a binary tree
- * @tree: pointer to the node to measure the depth
- * Return: Depth of the pointer, or 0 if tree is NULL
+ * aux_binary_tree_height - measures the height from a node in a binary tree
+ * @tree: pointer to the node to measure the height
+ * Return: height of the pointer, or 0 if tree is NULL
  */
 
 int aux_binary_tree_height(const binary_tree_t *tree)
@@ -22,20 +22,21 @@ int aux_binary_tree_height(const binary_tree_t *tree)
 /**
  * aux_binary_tree_is_perfect - aux function for perfect binary tree
  * @tree: Pointer to node
- * @level: Node level
+ * @lvl: Node lvl
+ * @height: Height from tree node
  * Return: 1 if tree is perfect, 0 otherwise
 */
 
-int aux_binary_tree_is_perfect(const binary_tree_t *tree, int depth, int level)
+int aux_binary_tree_is_perfect(const binary_tree_t *tree, int height, int lvl)
 {
 	if (!tree)
 		return (0);
 	if (!(tree->left) && !(tree->right))
-		return (depth == level ? 1 : 0);
+		return (height == lvl ? 1 : 0);
 	if (!(tree->left) || !(tree->right))
 		return (0);
-	return (aux_binary_tree_is_perfect(tree->left, depth, level + 1) *
-		   aux_binary_tree_is_perfect(tree->right, depth, level + 1));
+	return (aux_binary_tree_is_perfect(tree->left, height, lvl + 1) *
+		   aux_binary_tree_is_perfect(tree->right, height, lvl + 1));
 }
 /**
  * binary_tree_is_perfect - checks if a binary tree is perfect
